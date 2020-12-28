@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Spider Humble Starts</title>    
-    <script src = "proto.js"></script>
+    <script type = "module" src = "proto.js"></script>
     <script>
+        console.log('In second script tag')
         hello('From HTML')
-    </script></head>
+    </script>
+</head>
 <body>
 To start with character 1 at offset 0. To make things that are hard to see easy, even beautiful.
 That is the call I hope to help. For I have knonw the path many times. Thankful for those that have opened eyes
@@ -14,5 +16,8 @@ That is the call I hope to help. For I have knonw the path many times. Thankful 
 <svg id='spiderSvgCanvas' height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
 </svg> 
+<body>
+    <button name="b1" onclick="hello('From a button click')">LOL cat crawls the web</button>
+</body>
 </body>
 </html>

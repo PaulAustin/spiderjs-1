@@ -1,5 +1,16 @@
-# Dec 26, 2020
+# Dec 27, 2020
+* Pulled svgbuilder form 2016 and converted to class and module ES6
+* GIT and VS code is working well
+* install VSCode - LiveServer
+* Tweaked ESLint settings
+* Looking at using interact.js again
+* TODO add favicon.ico (to clear error from chrome/safari)
+* TODO how to call module functions from HTML (will be avoiding this mostly)
 
+Notes ES6, seem reasomable now, modules require hosting from server, file no longer works
+TODO - What about building web view based apps for iOS/Android?
+
+# Dec 26, 2020
 After a semester of projects with Turtle, scratch, Makecode, using blocks and snippets of text, thre is a beter sense of what thing to put in a backpack for a mountain climbing journey. 
 
 * Fun to use, dilightful visuals
@@ -18,7 +29,7 @@ A turtle that can spin webs, webs that can be crawled in many dimenstions.
 * Web Object
 * Button Object
 * Slide Object
-* A library for JS use
+* A library for JS use DONE (Using ES6 modules)
 * A meta shell for simple inteactive lisp like programs
 
 # Some helpful sites along the way
