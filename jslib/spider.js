@@ -24,27 +24,56 @@ SOFTWARE.
 import * as vector from './vector.js'
 import * as svgb from './svgbuilder.js'
 
-export class spider {
+/*
+    var base = app.dots.defineButtons(actionButtonDefs, document.getElementById('editorSvgCanvas'));
+    // It seesm SVG eat all the events, even ones that don't hit any objects :(
+    //actionDots.defineButtons(actionButtonDefs, document.getElementById('actionDotSvgCanvas'));
+
+    // This is pretty Wonky
+    app.defaultFiles.setupDefaultPages(false);
+
+    tbe.init(document.getElementById('editorSvgCanvas'), base);
+*/ 
+
+export class Spider {
   constructor () {
+    console.log('Creating a new spider')
+    this.heading = 0
     this.p = new vector.V2D();
     this.s = new svgb.SVGBuilder();
+    this.svg = document.getElementById('spiderSvgCanvas')
   }
 
   forward (distance) {
+    console.log('forward', distance)
     // Add a new node in the path
     // or at least make a dot. Much more to do here.
-    this.s.creatCircle(null, this.p.x, this.p.y, 100)
+    let elt = this.s.creatCircle(null, this.p.x, this.p.y, 100)
+
+    // this.background = svgb.createRect('editor-background', 0, 0, 20, 20, 0);
+    this.svg.append(elt);
+    // this.configInteractions();
   }
   
-  backward (distance) {}
+  backward (distance) {
+    console.log('backward', distance)
+  }
   
-  right (angle) {}
+  right (angle) {
+    this.heading -= angle
+    console.log('backward', this.heading)
+  }
   
-  left (angle) {}
+  left (angle) {
+    this.heading += angle
+    console.log('left', this.heading)
+  }
 
   goto (x, y) {
+    console.log('goto', x, y)
     this.p.set(0, 0)
   }
+
   setx (x) {}
   set (y) {}
   home () { this.goto(0, 0) }

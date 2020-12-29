@@ -1,11 +1,10 @@
 
-import * as svgb from './jslib/svgbuilder.js'
+import * as slib from './jslib/spider.js'
 
-export function hello (message) {
-  console.log('Howdy!', message)
+export function initSpider (message) {
+  console.log('Howdy from initSpider!', message)
+  return new slib.Spider()
 }
 
 // add an entry point to the global world
-window.hello = hello;
-hello('From JS ES6 code file')
-svgb.svgbHello("What's up out there?")
+window.initSpider = initSpider;

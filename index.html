@@ -7,7 +7,7 @@
     <script>
         function loadDone () {
             console.log('In loadDone')
-            window.hello('From HTML')
+            octo = window.initSpider("From HTML")
         }
     </script>
 </head>
@@ -20,9 +20,9 @@ That is the call I hope to help. For I have knonw the path many times. Thankful 
 </svg>
 </div> 
 <div>
-    <button name="bF" onclick="hello('From a button click')">Forward</button>
-    <button name="bR" onclick="hello('From a button click')">Right</button>
-    <button name="bL" onclick="hello('From a button click')">Left</button>
+    <button name="bF" onclick="octo.forward(20)">Forward</button>
+    <button name="bR" onclick="octo.right(45)">Right</button>
+    <button name="bL" onclick="octo.left(45)">Left</button>
 </div>
 </body>
 </html>

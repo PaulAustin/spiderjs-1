@@ -1,3 +1,12 @@
+# Dec 29, 2020 - SDG
+* Trivial html to method call
+* Trivial SVG side effect.
+* TODO liek spider consider amounthe ares to crawl brick or tile walls
+These are very coarse grids or other geometries like a chess board, tik tack to
+They become simple data models with easy/fun views that students can index and modify
+key point is the the binding is automatic , ( and simoe insid the code) a bit
+old LED or light bulb panels of early computers
+
 # Dec 28, 2020
 Learning more ES6
 * stubs for a few classes Spider, Web, Vector
