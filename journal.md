@@ -1,7 +1,16 @@
+# Dec 28, 2020
+Learning more ES6
+* stubs for a few classes Spider, Web, Vector
+Ther are a few coomonly used libs fro vector/complex,right now
+Using as sample projects to just lear ES6 like students might do.
+* Body onload works for call after ES6 modules has asyn loaded.
+* async loaded is different from POJS style
+* LiveServer (does dyamic auto reload throgh code injection, interesting-nice)
+
 # Dec 27, 2020
 * Pulled svgbuilder form 2016 and converted to class and module ES6
 * GIT and VS code is working well
-* install VSCode - LiveServer
+* install VSCode - LiveServer (does dyamic auto reload throgh code injection)
 * Tweaked ESLint settings
 * Looking at using interact.js again
 * TODO add favicon.ico (to clear error from chrome/safari)
@@ -25,7 +34,7 @@ A turtle that can spin webs, webs that can be crawled in many dimenstions.
 # Iniitial todo
 * Todo Rules DONE
 * html + JS baisc file DONE
-* Spider object
+* Spider object  ( Done Stubbed 12/28)
 * Web Object
 * Button Object
 * Slide Object
