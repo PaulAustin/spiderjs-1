@@ -6,6 +6,7 @@ These are very coarse grids or other geometries like a chess board, tik tack to
 They become simple data models with easy/fun views that students can index and modify
 key point is the the binding is automatic , ( and simoe insid the code) a bit
 old LED or light bulb panels of early computers
+* Changed origin github URL
 
 # Dec 28, 2020
 Learning more ES6
