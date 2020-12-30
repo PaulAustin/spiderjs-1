@@ -1,3 +1,12 @@
+# Dec 30, 2020
+* Drawing simple vectors wiht color and width
+* stlye/class woudl be good to include as intro to CSS
+even if just done as a JS object, introduces defining and reusing style
+aso hlpe introdut properties specific to each graphical element
+such as text.
+* Using vector math instrad fo x,y at more levels. 
+* Next up animation
+
 # Dec 29, 2020 - SDG
 * Trivial html to method call
 * Trivial SVG side effect.

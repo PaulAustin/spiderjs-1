@@ -15,14 +15,18 @@
 To start with character 1 at offset 0. To make things that are hard to see easy, even beautiful.
 That is the call I hope to help. For I have knonw the path many times. Thankful for those that have opened eyes
 <div>
-<svg id='spiderSvgCanvas' height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg id='spiderSvgCanvas' height="400" width="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
 </svg>
 </div> 
 <div>
-    <button name="bF" onclick="octo.forward(20)">Forward</button>
-    <button name="bR" onclick="octo.right(45)">Right</button>
-    <button name="bL" onclick="octo.left(45)">Left</button>
+    <button onclick="octo.forward(20)">Forward</button>
+    <button onclick="octo.right(45)">Right</button>
+    <button onclick="octo.left(45)">Left</button>
+    <button onclick="octo.penColor('red')">Red</button>
+    <button onclick="octo.penColor('blue')">Blue</button>
+    <button onclick="octo.penWidth(4)">Wide</button>
+    <button onclick="octo.penWidth(1)">Narrow</button>
 </div>
 </body>
 </html>

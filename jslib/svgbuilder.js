@@ -20,37 +20,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-export function svgbHello (param) {
-  console.log('Hello From svgb', param);
+export function pmove (v) {
+  return 'm' + v.x + ' ' + v.y + ' ';
 }
-
-export class PathBuider {
-  move (dx, dy) {
-    return 'm' + dx + ' ' + dy + ' ';
-  }
-  //* realtive horizontal line
-  hline (dx) {
-    return 'h' + dx + ' ';
-  }
-  //* relative vertical line
-  vline (dy) {
-    return 'v' + dy + ' ';
-  }
-  //* relative straight line
-  line (dx, dy) {
-    return 'l' + dx + ' ' + dy + ' ';
-  }
-  //* arc path element
-  arc (radius, degrees, large, sweep, dx, dy) {
-    var text = 'a' + radius + ' ' + radius + ' ' + degrees;
-    text += ' ' + large + ' ' + sweep + ' ' + dx + ' ' + dy + ' ';
-    return text;
-  }
-  //* path closing
-  close () {
-    return 'z ';
-  }  
+export function phline (dx) {
+  return 'h' + dx + ' ';
 }
+export function pvline (dy) {
+  return 'v' + dy + ' ';
+}
+export function pline (v) {
+  return 'l' + v.x + ' ' + v.y + ' ';
+}
+// arc path element
+export function parc (radius, degrees, large, sweep, dx, dy) {
+  var text = 'a' + radius + ' ' + radius + ' ' + degrees;
+  text += ' ' + large + ' ' + sweep + ' ' + dx + ' ' + dy + ' ';
+  return text;
+}
+// path closing
+export function pclose () {
+  return 'z';
+}  
 
 export class SVGBuilder {
   constructor () {
@@ -87,34 +78,35 @@ export class SVGBuilder {
     return elt;
   }
   
-  creatCircle (elementClass, cx, cy, r) {
+  creatCircle (cx, cy, r) {
     var elt = document.createElementNS(this.ns, 'circle');
-    elt.setAttribute('class', elementClass);
+    // elt.setAttribute('class', elementClass);
     elt.setAttribute('cx', cx);
     elt.setAttribute('cy', cy);
     elt.setAttribute('r', r);
     return elt;
   }
   
-  createGroup (elementClass, x, y) {
+  createGroup (x, y) {
     var elt = document.createElementNS(this.ns, 'g');
-    elt.setAttribute('class', elementClass);
+    // elt.setAttribute('class', elementClass);
     elt.setAttribute('transform', 'translate (' + x + ' ' + y + ')');
     return elt;
   }
   
-  createText (elementClass, x, y, text) {
+  createText (x, y, text) {
     var elt = document.createElementNS(this.ns, 'text');
-    elt.setAttribute('class', elementClass);
+    // elt.setAttribute('class', elementClass);
     elt.setAttribute('x', x);
     elt.setAttribute('y', y);
     elt.textContent = text;
     return elt;
   }
   
-  createPath (elementClass, pathData) {
+  createPath (lstyle, pathData) {
     var elt = document.createElementNS(this.ns, 'path');
-    elt.setAttribute('class', elementClass);
+    elt.setAttribute('stroke', lstyle.color);
+    elt.setAttribute('stroke-width', lstyle.width);
     elt.setAttribute('d', pathData);
     return elt;
   }

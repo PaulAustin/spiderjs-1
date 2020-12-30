@@ -23,6 +23,20 @@ SOFTWARE.
 // Lanuguages with complex number support are nice, be it fortran, labview, python and the like 
 // But this works pretty well.
 
+export function MakeXY (x, y) {
+  let v = new V2D()
+  v.x = x;
+  v.y = y;
+  return v
+}
+export function MakePolar (r, t) {
+  let v = new V2D()
+  let rad = t * Math.PI / 180.0
+  v.x = r * Math.cos(rad);
+  v.y = r * Math.sin(rad);
+  return v
+}
+
 export function isScalar (v) {
   // If not, coudl assert the it should have vector
   // like propoerties. The name would change
@@ -39,32 +53,26 @@ export class V2D {
     this.y = y;
   }
   add (v) {
-    if (isScalar(v)) {
-      this.x += v;
-    } else {
-      this.x += v.x;
-      this.y += v.y;
-    }
+    this.x += v.x;
+    this.y += v.y;
   }
   sub (v) {
-    if (isScalar(v)) {
-      this.x -= v;
-    } else {
-      this.x -= v.x;
-      this.y -= v.y;
-    }
+    this.x -= v.x;
+    this.y -= v.y;
   }
   mul (v) {
-    if (isScalar(v)) {
-      this.x *= v;
-      this.y *= v;
-    } else {
-      this.x -= (this.x * v.x) - (this.y * v.y);
-      this.y -= (this.x * v.y) + (this.y * v.x);
-    }
+    this.x -= (this.x * v.x) - (this.y * v.y);
+    this.y -= (this.x * v.y) + (this.y * v.x);
+  }
+  scale (v) {
+    this.x *= v;
+    this.y *= v;
   }
   abs () {
-    Math.sqrt((this.x * this.x) + (this.y * this.y))
+    return Math.sqrt((this.x * this.x) + (this.y * this.y))
+  }
+  angle () {
+    return Math.atan(this.x / this.y)
   }
   div () {}
 }

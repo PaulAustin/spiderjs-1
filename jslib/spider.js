@@ -38,21 +38,36 @@ import * as svgb from './svgbuilder.js'
 export class Spider {
   constructor () {
     console.log('Creating a new spider')
+    this.lstyle = {color: 'grey', width: 1}
     this.heading = 0
-    this.p = new vector.V2D();
+    this.location = new vector.V2D();
     this.s = new svgb.SVGBuilder();
     this.svg = document.getElementById('spiderSvgCanvas')
+    this.path = []
+    this.penDepth = 0 
+    this.pathActive = false
+  }
+
+  // each node represents a set of state changes
+  // that will be applied across sapce and time
+  // In classic turtle the changes are more discret
+  addNode (n) {
+    // possible changes x, y, heading, color, 
+    // transition linear. 
+    // This can make a circle or other curve a simple transaction
+    // with goto
+    this.path.push(n)
   }
 
   forward (distance) {
     console.log('forward', distance)
-    // Add a new node in the path
-    // or at least make a dot. Much more to do here.
-    let elt = this.s.creatCircle(null, this.p.x, this.p.y, 100)
 
-    // this.background = svgb.createRect('editor-background', 0, 0, 20, 20, 0);
+    let v = vector.MakePolar(distance, this.heading)
+    let path = svgb.pmove(this.location) + svgb.pline(v) + svgb.pclose()
+    this.location.add(v)
+
+    let elt = this.s.createPath(this.lstyle, path)
     this.svg.append(elt);
-    // this.configInteractions();
   }
   
   backward (distance) {
@@ -60,23 +75,45 @@ export class Spider {
   }
   
   right (angle) {
-    this.heading -= angle
+    this.heading += angle
+    let pn = new PathNode()
+    this.addNode(pn)
     console.log('backward', this.heading)
   }
   
   left (angle) {
-    this.heading += angle
+    this.heading -= angle
+    let pn = new PathNode()
+    this.addNode(pn)
     console.log('left', this.heading)
   }
 
   goto (x, y) {
-    console.log('goto', x, y)
     this.p.set(0, 0)
+    let pn = new PathNode()
+    this.addNode(pn)
   }
+
+  beginPath () {
+    // add fill color? 
+    this.pathActive = true
+    // path start, length?
+  }
+  endPath () {
+    this.pathActive = false
+    // close and fill.
+    // does it build incrementally, fill incramentally
+    // the dynamic element seems reaasonable, it grows like a soap bubble? 
+  }
+
+  // return list of points
+  pathPoints () {}
 
   setx (x) {}
   set (y) {}
-  home () { this.goto(0, 0) }
+  home () { 
+    this.goto(0, 0)
+  }
   circle () {}
 
   push () {}
@@ -96,10 +133,20 @@ export class Spider {
   distance () {}
 
   // Pens
-  pendown () {}
-  penup () {}
-  penwidth (width) {}
-  pencolor () {}
+  penDown () {
+    // stop the recording of pathNodes
+    this.penDepth -= 1
+  }
+  penUp () {
+    // stop the recording of pathNodes
+    this.penDepth += 1
+  }
+  penWidth (width) {
+    this.lstyle.width = width
+  }
+  penColor (color) {
+    this.lstyle.color = color
+  }
 
   reset () {} // clear + home
   clear () {}
@@ -109,8 +156,10 @@ export class web {
   spin () {}
 }
 
-export class link {
-
+export class PathNode {
+  constructor (name) {
+    this.name = name
+  }
 }
 
 export class animations {
