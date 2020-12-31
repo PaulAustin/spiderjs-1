@@ -10,7 +10,18 @@
             octo = window.initSpider("From HTML")
         }
     </script>
-</head>
+    <script>
+        function spiral () {
+            octo.goto(-90, 90)
+            octo.penColor('blue')
+            octo.penWidth(1.5)
+            for (i = 0; i < 200; i++) {
+                octo.forward(180)
+                octo.right(86)
+            }
+        }
+    </script>
+    </head>
 <body onload="loadDone()">
 To start with character 1 at offset 0. To make things that are hard to see easy, even beautiful.
 That is the call I hope to help. For I have knonw the path many times. Thankful for those that have opened eyes
@@ -27,6 +38,7 @@ That is the call I hope to help. For I have knonw the path many times. Thankful 
     <button onclick="octo.penColor('blue')">Blue</button>
     <button onclick="octo.penWidth(4)">Wide</button>
     <button onclick="octo.penWidth(1)">Narrow</button>
+    <button onclick="spiral()">Spiral</button>
 </div>
 </body>
 </html>

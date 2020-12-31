@@ -61,8 +61,6 @@ export class Spider {
   }
 
   forward (distance) {
-    console.log('forward', distance)
-
     let v = vector.MakePolar(distance, this.heading)
     let s = this.s
     let path = s.pmove(this.location) + s.pline(v) + s.pclose()
@@ -73,25 +71,22 @@ export class Spider {
   }
   
   backward (distance) {
-    console.log('backward', distance)
   }
   
   right (angle) {
     this.heading -= angle
     let pn = new PathNode()
     this.addNode(pn)
-    console.log('backward', this.heading)
   }
   
   left (angle) {
     this.heading += angle
     let pn = new PathNode()
     this.addNode(pn)
-    console.log('left', this.heading)
   }
 
   goto (x, y) {
-    this.p.set(0, 0)
+    this.location.set(0, 0)
     let pn = new PathNode()
     this.addNode(pn)
   }

@@ -24,7 +24,6 @@ SOFTWARE.
 simple form of expression is in the from of JSON stile object
 { instruction: [
 
-
 ]
 }
 */
@@ -54,7 +53,7 @@ export class Execution {
     if (ins === 'loop') {
 
     } else {
-      
+
     }
   }
 }
