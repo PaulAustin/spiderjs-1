@@ -1,3 +1,22 @@
+# Dec 31, 2020
+* Added SVGSurface Class
+This will likely be part of a Surface drawing hierarchy ( SVG, BitMap, ???)
+The purpose is to make it easy to see the core parts of
+of these pipelines, So for example Bit maps will bee chunky even on retina 
+displays. Un clear at this point if canvas will will be used,
+for smaller bitmaps ( e.g. 10x10 or 20x20- they still map be SVGs)
+* Added Spriral
+* TODO allow aging on path elements, 
+they can change color other properteis or be delted completely. This will help 
+contoniousy running programs that exceed reasonable complexity.
+(thath is oldest may be delted automatically)
+* TODO, pined, vs free-gravity affected points
+* FATbit scaling of HTML canvas objects doe not seem too easy
+See notes here. http://jsfiddle.net/alnitak/LwJJR/
+and here https://stackoverflow.com/questions/8597081/how-to-stretch-images-with-no-antialiasing
+The best approach may be to sipley have native resolution canvas wiht
+JS array backing store. when it is changes, the data will be remapped
+
 # Dec 30, 2020
 * Drawing simple vectors wiht color and width
 * stlye/class woudl be good to include as intro to CSS
@@ -10,7 +29,7 @@ such as text.
 # Dec 29, 2020 - SDG
 * Trivial html to method call
 * Trivial SVG side effect.
-* TODO liek spider consider amounthe ares to crawl brick or tile walls
+* TODO like spider consider amounthe ares to crawl brick or tile walls
 These are very coarse grids or other geometries like a chess board, tik tack to
 They become simple data models with easy/fun views that students can index and modify
 key point is the the binding is automatic , ( and simoe insid the code) a bit
@@ -33,7 +52,7 @@ Using as sample projects to just lear ES6 like students might do.
 * Tweaked ESLint settings
 * Looking at using interact.js again
 * TODO add favicon.ico (to clear error from chrome/safari)
-* TODO how to call module functions from HTML (will be avoiding this mostly)
+* DONE how to call module functions from HTML (will be avoiding this mostly)
 
 Notes ES6, seem reasomable now, modules require hosting from server, file no longer works
 TODO - What about building web view based apps for iOS/Android?
@@ -51,7 +70,7 @@ A turtle that can spin webs, webs that can be crawled in many dimenstions.
 
 
 # Iniitial todo
-* Todo Rules DONE
+* todo Rules DONE
 * html + JS baisc file DONE
 * Spider object  ( Done Stubbed 12/28)
 * Web Object

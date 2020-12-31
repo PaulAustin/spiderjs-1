@@ -19,14 +19,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 export class Surface {
-  constructor (svg) {
-    this.svg = svg
-    this.xlinkns = 'http://www.w3.org/1999/xlink';
-    this.ns = 'http://www.w3.org/2000/svg';
+  constructor () {
     this.setExtent(100)
   }
+
   setExtent (width, height) {
     this.w = width;
     this.h = height;
@@ -46,6 +43,18 @@ export class Surface {
   } 
   mapY (y) {
     return this.scaleY(y) + this.yOffset
+  }
+}
+
+export class BitmapSurface extends Surface {  
+}
+
+export class VectorSurface extends Surface {
+  constructor (svg) {
+    super()
+    this.svg = svg
+    this.xlinkns = 'http://www.w3.org/1999/xlink';
+    this.ns = 'http://www.w3.org/2000/svg';
   }
   pmove (v) {
     return 'm' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' ';
@@ -74,6 +83,8 @@ export class Surface {
     var elt = document.createElementNS(this.ns, 'path');
     elt.setAttribute('stroke', lstyle.color);
     elt.setAttribute('stroke-width', lstyle.width);
+    // paths look at linejoin not linecap
+    elt.setAttribute('stroke-linejoin', 'round');
     elt.setAttribute('d', pathData);
     return elt;
   }

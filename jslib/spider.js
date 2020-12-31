@@ -22,7 +22,7 @@ SOFTWARE.
 */
 
 import * as vector from './vector.js'
-import * as svgb from './svgbuilder.js'
+import * as surface from './surface.js'
 
 /*
     var base = app.dots.defineButtons(actionButtonDefs, document.getElementById('editorSvgCanvas'));
@@ -42,7 +42,7 @@ export class Spider {
     this.heading = 0
     this.location = new vector.V2D();
     let svg = document.getElementById('spiderSvgCanvas')
-    this.s = new svgb.Surface(svg);
+    this.s = new surface.VectorSurface(svg);
     this.s.setExtent(400, 400)
     this.path = []
     this.penDepth = 0 
