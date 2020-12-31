@@ -41,8 +41,9 @@ export class Spider {
     this.lstyle = {color: 'grey', width: 1}
     this.heading = 0
     this.location = new vector.V2D();
-    this.s = new svgb.SVGBuilder();
-    this.svg = document.getElementById('spiderSvgCanvas')
+    let svg = document.getElementById('spiderSvgCanvas')
+    this.s = new svgb.Surface(svg);
+    this.s.setExtent(400, 400)
     this.path = []
     this.penDepth = 0 
     this.pathActive = false
@@ -63,11 +64,12 @@ export class Spider {
     console.log('forward', distance)
 
     let v = vector.MakePolar(distance, this.heading)
-    let path = svgb.pmove(this.location) + svgb.pline(v) + svgb.pclose()
+    let s = this.s
+    let path = s.pmove(this.location) + s.pline(v) + s.pclose()
     this.location.add(v)
 
-    let elt = this.s.createPath(this.lstyle, path)
-    this.svg.append(elt);
+    let elt = s.createPath(this.lstyle, path)
+    s.append(elt)
   }
   
   backward (distance) {
@@ -75,14 +77,14 @@ export class Spider {
   }
   
   right (angle) {
-    this.heading += angle
+    this.heading -= angle
     let pn = new PathNode()
     this.addNode(pn)
     console.log('backward', this.heading)
   }
   
   left (angle) {
-    this.heading -= angle
+    this.heading += angle
     let pn = new PathNode()
     this.addNode(pn)
     console.log('left', this.heading)
@@ -162,7 +164,11 @@ export class PathNode {
   }
 }
 
-export class animations {
+export class LineNode extends PathNode {
+
+}
+
+export class Animations {
 
 }
 

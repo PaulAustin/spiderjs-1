@@ -20,28 +20,68 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-export function pmove (v) {
-  return 'm' + v.x + ' ' + v.y + ' ';
+export class Surface {
+  constructor (svg) {
+    this.svg = svg
+    this.xlinkns = 'http://www.w3.org/1999/xlink';
+    this.ns = 'http://www.w3.org/2000/svg';
+    this.setExtent(100)
+  }
+  setExtent (width, height) {
+    this.w = width;
+    this.h = height;
+    this.xOffset = this.w / 2
+    this.yOffset = this.h / 2
+  }
+  // Consider full transform, its over kill, but woudl be helpful to
+  // to show what the underlying pipeline does.
+  scaleX (x) {
+    return x
+  }
+  scaleY (y) {
+    return -y
+  }
+  mapX (x) { 
+    return this.scaleX(x) + this.xOffset
+  } 
+  mapY (y) {
+    return this.scaleY(y) + this.yOffset
+  }
+  pmove (v) {
+    return 'm' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' ';
+  }
+  phline (distance) {
+    return 'h' + distance + ' '
+  }
+  pvline (distance) {
+    return 'v' + distance + ' '
+  }
+  pline (v) {
+    return 'l' + this.scaleX(v.x) + ' ' + this.scaleY(v.y) + ' '
+  }
+  // arc path element
+  parc (radius, degrees, large, sweep, dx, dy) {
+    var text = 'a' + radius + ' ' + radius + ' ' + degrees
+    text += ' ' + large + ' ' + sweep + ' ' + dx + ' ' + dy + ' '
+    return text
+  }
+  // path closing
+  pclose () {
+    return 'z'
+  }  
+
+  createPath (lstyle, pathData) {
+    var elt = document.createElementNS(this.ns, 'path');
+    elt.setAttribute('stroke', lstyle.color);
+    elt.setAttribute('stroke-width', lstyle.width);
+    elt.setAttribute('d', pathData);
+    return elt;
+  }
+
+  append (elt) {
+    this.svg.append(elt);
+  }
 }
-export function phline (dx) {
-  return 'h' + dx + ' ';
-}
-export function pvline (dy) {
-  return 'v' + dy + ' ';
-}
-export function pline (v) {
-  return 'l' + v.x + ' ' + v.y + ' ';
-}
-// arc path element
-export function parc (radius, degrees, large, sweep, dx, dy) {
-  var text = 'a' + radius + ' ' + radius + ' ' + degrees;
-  text += ' ' + large + ' ' + sweep + ' ' + dx + ' ' + dy + ' ';
-  return text;
-}
-// path closing
-export function pclose () {
-  return 'z';
-}  
 
 export class SVGBuilder {
   constructor () {
@@ -101,13 +141,5 @@ export class SVGBuilder {
     elt.setAttribute('y', y);
     elt.textContent = text;
     return elt;
-  }
-  
-  createPath (lstyle, pathData) {
-    var elt = document.createElementNS(this.ns, 'path');
-    elt.setAttribute('stroke', lstyle.color);
-    elt.setAttribute('stroke-width', lstyle.width);
-    elt.setAttribute('d', pathData);
-    return elt;
-  }
+  }  
 }
