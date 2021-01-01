@@ -34,7 +34,9 @@ import * as surface from './surface.js'
 
     tbe.init(document.getElementById('editorSvgCanvas'), base);
 */ 
-
+export function newSpider () {
+  return new Spider()
+}
 export class Spider {
   constructor () {
     console.log('Creating a new spider')
@@ -46,7 +48,9 @@ export class Spider {
     this.s.setExtent(400, 400)
     this.path = []
     this.penDepth = 0 
-    this.pathActive = false
+    this.fillActive = false
+    this.speed = 0
+    this.showSpider()
   }
 
   // each node represents a set of state changes
@@ -89,13 +93,13 @@ export class Spider {
     this.location.setXY(x, y)
   }
 
-  beginPath () {
+  beginFill () {
     // add fill color? 
-    this.pathActive = true
+    this.fillActive = true
     // path start, length?
   }
-  endPath () {
-    this.pathActive = false
+  endFill () {
+    this.fillActive = false
     // close and fill.
     // does it build incrementally, fill incramentally
     // the dynamic element seems reaasonable, it grows like a soap bubble? 
@@ -104,13 +108,23 @@ export class Spider {
   // return list of points
   pathPoints () {}
 
-  setX (x) {}
-  setY (y) {}
+  setX (x) {
+    this.goto(x, this.location.y)
+  }
+
+  setY (y) {
+    this.goto(this.location.x, y)
+  }
+
+  setHeading (h) {
+    this.heading = h
+  }
 
   home () { 
     this.goto(0, 0)
-    this.heading = 0 // use accessor
+    this.setHeading(0)
   }
+
   circle () {}
 
   push () {}
@@ -122,11 +136,19 @@ export class Spider {
   clearstamp () {}
   clearstamps () {}
   undo () {}
-  speed () {}
-  position () {}
+  setSpeed (speed) {
+    this.speed = speed
+  }
+  position () {
+    return this.location
+  }
   towards () {}
-  xcor () {}
-  ycor () {}
+  x () {
+    return this.location.x
+  }
+  y () {
+    return this.location.y
+  }
   distance () {}
 
   // Pens
@@ -144,9 +166,22 @@ export class Spider {
   penColor (color) {
     this.lstyle.color = color
   }
-
-  reset () {} // clear + home
-  clear () {}
+  reset () {
+    this.clear()
+    this.home()
+  }
+  clear () {
+    // clear pth list and SVG elements
+  }
+  showSpider () {
+    this.visible = true
+  }
+  hideSpider () {
+    this.visible = false
+  }
+  isVisible () {
+    return this.visible
+  }
 }
 
 export class web {

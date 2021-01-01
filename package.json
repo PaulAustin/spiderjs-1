@@ -1,7 +1,7 @@
 {
   "name": "spiderjs",
   "version": "1.0.0",
-  "description": "Turtle wiht webs",
+  "description": "Like turtles, but with webs",
   "main": "proto.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
