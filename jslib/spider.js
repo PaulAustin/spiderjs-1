@@ -40,7 +40,7 @@ export class Spider {
     console.log('Creating a new spider')
     this.lstyle = {color: 'grey', width: 1}
     this.heading = 0
-    this.location = new vector.V2D();
+    this.location = vector.newXY(0, 0);
     let svg = document.getElementById('spiderSvgCanvas')
     this.s = new surface.VectorSurface(svg);
     this.s.setExtent(400, 400)
@@ -52,43 +52,41 @@ export class Spider {
   // each node represents a set of state changes
   // that will be applied across sapce and time
   // In classic turtle the changes are more discret
-  addNode (n) {
-    // possible changes x, y, heading, color, 
-    // transition linear. 
-    // This can make a circle or other curve a simple transaction
-    // with goto
-    this.path.push(n)
+  addNode (elt) {
+    // This is an ohc to the path nodes holding the actual 
+    // cire code fr each behaviour. The spider methods 
+    // are wrappers with specific parameters that are 
+    // not so data driven.
+    let pn = new LineNode(elt)
+    this.path.push(pn)
+    this.s.append(elt)
   }
 
   forward (distance) {
-    let v = vector.MakePolar(distance, this.heading)
+    let v = vector.newPolar(distance, this.heading)
     let s = this.s
     let path = s.pmove(this.location) + s.pline(v) + s.pclose()
     this.location.add(v)
 
     let elt = s.createPath(this.lstyle, path)
-    s.append(elt)
+    this.addNode(elt)
   }
   
   backward (distance) {
   }
   
   right (angle) {
+    // can be animated at slow speeds
     this.heading -= angle
-    let pn = new PathNode()
-    this.addNode(pn)
   }
   
   left (angle) {
     this.heading += angle
-    let pn = new PathNode()
-    this.addNode(pn)
   }
 
   goto (x, y) {
-    this.location.set(0, 0)
-    let pn = new PathNode()
-    this.addNode(pn)
+    // animate a hop to a new location with shadow?
+    this.location.setXY(x, y)
   }
 
   beginPath () {
@@ -106,10 +104,12 @@ export class Spider {
   // return list of points
   pathPoints () {}
 
-  setx (x) {}
-  set (y) {}
+  setX (x) {}
+  setY (y) {}
+
   home () { 
     this.goto(0, 0)
+    this.heading = 0 // use accessor
   }
   circle () {}
 
@@ -154,13 +154,16 @@ export class web {
 }
 
 export class PathNode {
-  constructor (name) {
-    this.name = name
+  constructor (elt) {
+    this.elt = elt
   }
 }
 
 export class LineNode extends PathNode {
-
+  constructor (elt) { 
+    super(elt)
+    this.x = 0
+  }
 }
 
 export class Animations {

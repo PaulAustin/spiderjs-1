@@ -1,3 +1,9 @@
+# Dec 31, 2020 
+* Each spider ads elements to its own group
+properties like color, widt, heading and location are 
+now spider specific.
+* Sure need exec system running now.
+
 # Dec 31, 2020
 * Added SVGSurface Class
 This will likely be part of a Surface drawing hierarchy ( SVG, BitMap, ???)

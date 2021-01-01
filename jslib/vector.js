@@ -23,13 +23,13 @@ SOFTWARE.
 // Lanuguages with complex number support are nice, be it fortran, labview, python and the like 
 // But this works pretty well.
 
-export function MakeXY (x, y) {
+export function newXY (x, y) {
   let v = new V2D()
   v.x = x;
   v.y = y;
   return v
 }
-export function MakePolar (r, t) {
+export function newPolar (r, t) {
   let v = new V2D()
   let rad = t * Math.PI / 180.0
   v.x = r * Math.cos(rad);
@@ -48,7 +48,7 @@ export class V2D {
   constructor () {
     this.x = this.y = 0
   }
-  set (x, y) {
+  setXY (x, y) {
     this.x = x;
     this.y = y;
   }

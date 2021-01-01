@@ -1,10 +1,9 @@
 
-import * as slib from './jslib/spider.js'
+import * as spider from './jslib/spider.js'
 
-export function initSpider (message) {
-  console.log('Howdy from initSpider!', message)
-  return new slib.Spider()
+export function newSpider () {
+  return new spider.Spider()
 }
 
 // add an entry point to the global world
-window.initSpider = initSpider;
+window.newSpider = newSpider;

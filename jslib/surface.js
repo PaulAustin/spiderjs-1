@@ -53,8 +53,9 @@ export class VectorSurface extends Surface {
   constructor (svg) {
     super()
     this.svg = svg
-    this.xlinkns = 'http://www.w3.org/1999/xlink';
-    this.ns = 'http://www.w3.org/2000/svg';
+//  this.xlinkns = 'http://www.w3.org/1999/xlink';
+    this.ns = 'http://www.w3.org/2000/svg'
+    this.group = this.createGroup(0, 0)
   }
   pmove (v) {
     return 'm' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' ';
@@ -89,8 +90,15 @@ export class VectorSurface extends Surface {
     return elt;
   }
 
+  createGroup (x, y) {
+    let group = document.createElementNS(this.ns, 'g');
+    group.setAttribute('transform', 'translate (' + x + ' ' + y + ')');
+    this.svg.appendChild(group);
+    return group;
+  }
+  
   append (elt) {
-    this.svg.append(elt);
+    this.group.appendChild(elt);
   }
 }
 
@@ -137,14 +145,7 @@ export class SVGBuilder {
     elt.setAttribute('r', r);
     return elt;
   }
-  
-  createGroup (x, y) {
-    var elt = document.createElementNS(this.ns, 'g');
-    // elt.setAttribute('class', elementClass);
-    elt.setAttribute('transform', 'translate (' + x + ' ' + y + ')');
-    return elt;
-  }
-  
+    
   createText (x, y, text) {
     var elt = document.createElementNS(this.ns, 'text');
     // elt.setAttribute('class', elementClass);

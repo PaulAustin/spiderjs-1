@@ -7,17 +7,26 @@
     <script>
         function loadDone () {
             console.log('In loadDone')
-            octo = window.initSpider("From HTML")
+            octo = window.newSpider()
+            octo2 = window.newSpider()
+            octo2.penColor('fuchsia')
+            octo2.penWidth(2.5)
         }
     </script>
     <script>
         function spiral () {
-            octo.goto(-90, 90)
+            octo.home()
             octo.penColor('blue')
             octo.penWidth(1.5)
             for (i = 0; i < 200; i++) {
                 octo.forward(180)
                 octo.right(115)
+            }
+
+            octo2.home()
+            for (i = 0; i < 16; i++) {
+                octo2.forward(100)
+                octo2.right(170)
             }
         }
     </script>
