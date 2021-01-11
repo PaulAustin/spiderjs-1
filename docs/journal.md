@@ -1,3 +1,9 @@
+# Jan 11, 2021 
+* Starting on the  mappig pipeline
+* Geomotry class is an experiment wiht generators iterators
+* Need to switch to composable surfaces ( e.g. a rotated grid on a grid)
+* Absolute positioning for paths
+
 # Dec 31, 2020 
 * Each spider ads elements to its own group
 properties like color, widt, heading and location are 

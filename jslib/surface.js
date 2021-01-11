@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2016 Paul Austin - SDG
+Copyright (c) 2021 Paul Austin - SDG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -60,6 +60,9 @@ export class VectorSurface extends Surface {
   pmove (v) {
     return 'm' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' ';
   }
+  pamove (v) {
+    return 'M' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' ';
+  }
   phline (distance) {
     return 'h' + distance + ' '
   }
@@ -68,6 +71,9 @@ export class VectorSurface extends Surface {
   }
   pline (v) {
     return 'l' + this.scaleX(v.x) + ' ' + this.scaleY(v.y) + ' '
+  }
+  paline (v) {
+    return 'L' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' '
   }
   // arc path element
   parc (radius, degrees, large, sweep, dx, dy) {

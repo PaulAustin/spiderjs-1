@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>Spider Humble Starts</title>    
-    <script type = "module" src = "proto.js"></script>
+    <script type = "module" src = "main.js"></script>
     <script>
         function loadDone () {
             console.log('In loadDone')
-            octo = window.newSpider()
-            octo2 = window.newSpider()
+            let svg = document.getElementById('spiderSvgCanvas')
+            octo = window.spider.newSpider(svg)
+            octo2 = window.spider.newSpider(svg)
             octo2.penColor('fuchsia')
             octo2.penWidth(2.5)
         }
@@ -22,7 +23,6 @@
                 octo.forward(180)
                 octo.right(115)
             }
-
             octo2.home()
             for (i = 0; i < 16; i++) {
                 octo2.forward(100)
@@ -32,10 +32,8 @@
     </script>
     </head>
 <body onload="loadDone()">
-To start with character 1 at offset 0. To make things that are hard to see easy, even beautiful.
-That is the call I hope to help. For I have knonw the path many times. Thankful for those that have opened eyes
 <div>
-<svg id='spiderSvgCanvas' height="400" width="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg id='spiderSvgCanvas' height="500" width="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
 </svg>
 </div> 
@@ -48,6 +46,9 @@ That is the call I hope to help. For I have knonw the path many times. Thankful 
     <button onclick="octo.penWidth(8)">Wide</button>
     <button onclick="octo.penWidth(1)">Narrow</button>
     <button onclick="spiral()">Spiral</button>
+    <button onclick="window.spider.testGrid()">Grid</button>    
 </div>
+To start with character 1 at offset 0. To make things that are hard to see easy, even beautiful.
+That is the call I hope to help. For I have knonw the path many times. Thankful for those that have opened eyes
 </body>
 </html>

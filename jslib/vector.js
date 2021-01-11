@@ -84,3 +84,12 @@ export class vector3 {
   div () {}
 }
 
+/* Quaternion */
+export class vectorQ {
+  constructor () {
+    this.re = 0
+    this.i = 0
+    this.j = 0
+    this.k = 0
+  }
+}

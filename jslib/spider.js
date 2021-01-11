@@ -1,4 +1,3 @@
-
 /*
 Copyright (c) 2021 Paul Austin - SDG
 
@@ -26,24 +25,18 @@ import * as surface from './surface.js'
 
 /*
     var base = app.dots.defineButtons(actionButtonDefs, document.getElementById('editorSvgCanvas'));
-    // It seesm SVG eat all the events, even ones that don't hit any objects :(
+    // It seems SVG eat all the events, even ones that don't hit any objects :(
     //actionDots.defineButtons(actionButtonDefs, document.getElementById('actionDotSvgCanvas'));
-
-    // This is pretty Wonky
-    app.defaultFiles.setupDefaultPages(false);
-
-    tbe.init(document.getElementById('editorSvgCanvas'), base);
 */ 
-export function newSpider () {
-  return new Spider()
+export function newSpider (svg) {
+  return new Spider(svg)
 }
 export class Spider {
-  constructor () {
+  constructor (svg) {
     console.log('Creating a new spider')
     this.lstyle = {color: 'grey', width: 1}
     this.heading = 0
     this.location = vector.newXY(0, 0);
-    let svg = document.getElementById('spiderSvgCanvas')
     this.s = new surface.VectorSurface(svg);
     this.s.setExtent(400, 400)
     this.path = []
@@ -69,7 +62,7 @@ export class Spider {
   forward (distance) {
     let v = vector.newPolar(distance, this.heading)
     let s = this.s
-    let path = s.pmove(this.location) + s.pline(v) + s.pclose()
+    let path = s.pamove(this.location) + s.pline(v) + s.pclose()
     this.location.add(v)
 
     let elt = s.createPath(this.lstyle, path)
@@ -86,6 +79,17 @@ export class Spider {
   
   left (angle) {
     this.heading += angle
+  }
+
+  lineto (x, y) {
+    // animate a hop to a new location with shadow?
+    let s = this.s
+    let v = vector.newXY(x, y)
+    let path = s.pamove(this.location) + s.paline(v) + s.pclose()
+    this.location.setXY(x, y)
+
+    let elt = s.createPath(this.lstyle, path)
+    this.addNode(elt)
   }
 
   goto (x, y) {
