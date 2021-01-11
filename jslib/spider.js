@@ -29,15 +29,16 @@ import * as surface from './surface.js'
     //actionDots.defineButtons(actionButtonDefs, document.getElementById('actionDotSvgCanvas'));
 */ 
 export function newSpider (svg) {
-  return new Spider(svg)
+  let s = new surface.VectorSurface(svg);
+  return new Spider(s)
 }
+
 export class Spider {
-  constructor (svg) {
-    console.log('Creating a new spider')
+  constructor (s) {
     this.lstyle = {color: 'grey', width: 1}
     this.heading = 0
     this.location = vector.newXY(0, 0);
-    this.s = new surface.VectorSurface(svg);
+    this.s = s
     this.s.setExtent(400, 400)
     this.path = []
     this.penDepth = 0 

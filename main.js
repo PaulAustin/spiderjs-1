@@ -1,4 +1,5 @@
 
+import * as surface from './jslib/surface.js'
 import * as spider from './jslib/spider.js'
 import * as geo from './jslib/geometry.js'
 
@@ -8,5 +9,6 @@ window.spider = {}
 window.spider.newSpider = spider.newSpider
 window.spider.testGrid = function () {
   let svg = document.getElementById('spiderSvgCanvas')
-  geo.createCGrid(svg, 0, 20, 5, 0, 20, 5)
+  let s = new surface.VectorSurface(svg);
+  geo.createCGrid(s, 0, 20, 5, 0, 20, 5)
 }

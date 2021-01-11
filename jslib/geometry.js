@@ -35,8 +35,8 @@ function * linearRange (v, dv, n) { // a generator function
 }
 
 // Ininital drawing functions
-export function createCGrid (svg, x, dx, nx, y, dy, ny) {
-  let octo = new spider.Spider(svg)
+export function createCGrid (s, x, dx, nx, y, dy, ny) {
+  let octo = new spider.Spider(s)
   octo.penColor('green')
   octo.penWidth(2.5)
   let w = dx * (nx - 1)
@@ -51,6 +51,5 @@ export function createCGrid (svg, x, dx, nx, y, dy, ny) {
   }
 }
 
-export function createPGrid (svg, d, dx, a, da) {
-
+export function createPGrid (s, d, dx, a, da) {
 }

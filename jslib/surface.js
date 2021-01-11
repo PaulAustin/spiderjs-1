@@ -22,6 +22,7 @@ SOFTWARE.
 export class Surface {
   constructor () {
     this.setExtent(100)
+    this.linear = true
   }
 
   setExtent (width, height) {
@@ -43,6 +44,30 @@ export class Surface {
   } 
   mapY (y) {
     return this.scaleY(y) + this.yOffset
+  }
+}
+
+export class VirtualSurface extends Surface {  
+  // For SVG if this is done via the transform element then
+  // then live updates can be simpler. This only covers
+  // linear mappings ( including rotation) but not transition to polar
+  // spherical etc. 
+  
+  constructor (root) {
+    super()
+    this.root = root
+  }
+  scaleX (x) {
+    return super.scaleX(x)
+  }
+  scaleY (y) {
+    return super.scaleY(y)
+  }
+  mapX (x) { 
+    return super.mapX(this.scaleX(x) + this.xOffset)
+  } 
+  mapY (y) {
+    return super.mapY(this.scaleY(y) + this.yOffset)
   }
 }
 
