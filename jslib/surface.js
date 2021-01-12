@@ -74,7 +74,7 @@ export class VirtualSurface extends Surface {
 export class BitmapSurface extends Surface {  
 }
 
-export class VectorSurface extends Surface {
+export class SVGSurface extends Surface {
   constructor (svg) {
     super()
     this.svg = svg

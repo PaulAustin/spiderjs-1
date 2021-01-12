@@ -29,7 +29,7 @@ import * as surface from './surface.js'
     //actionDots.defineButtons(actionButtonDefs, document.getElementById('actionDotSvgCanvas'));
 */ 
 export function newSpider (svg) {
-  let s = new surface.VectorSurface(svg);
+  let s = new surface.SVGSurface(svg);
   return new Spider(s)
 }
 
@@ -170,6 +170,9 @@ export class Spider {
   }
   penColor (color) {
     this.lstyle.color = color
+  }
+  penRGB (r, g, b) {
+    this.lstyle.color = 'rgb(' + r + ',' + g + ',' + b + ')'
   }
   reset () {
     this.clear()
