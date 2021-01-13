@@ -11,6 +11,7 @@ window.spider.newSpider = spider.newSpider
 window.spider.testGrid = function () {
   let svg = document.getElementById('spiderSvgCanvas')
   let s = new surface.SVGSurface(svg)
+  // let sSub = new surface.VirtualCSurface(s)
   geo.createCGrid(s, 0, 20, 5, 0, 20, 5)
 }
 
