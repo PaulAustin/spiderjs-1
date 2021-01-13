@@ -1,43 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Spider Humble Starts</title>    
-    <script type = "module" src = "main.js"></script>
-    <script>
-        function loadDone () {
-            console.log('In loadDone')
-            let svg = document.getElementById('spiderSvgCanvas')
-            octo = window.spider.newSpider(svg)
-            octo2 = window.spider.newSpider(svg)
-            octo2.penColor('fuchsia')
-            octo2.penWidth(2.5)
+  <meta charset="utf-8">
+  <title>Spider Humble Starts</title>    
+  <script type = "module" src = "script.js"></script>
+  <script>
+    function loadDone () {
+        svg = document.getElementById('spiderSvgCanvas')
+        octo = window.spider.newSpider(svg)
+    }
+  </script>
+  <script>
+      function spiral () {
+        // Draw one inline
+        octo.home()
+        octo.penColor('blue')
+        octo.penWidth(1.5)
+        for (i = 0; i < 200; i++) {
+            octo.forward(180)
+            octo.right(115)
         }
-    </script>
-    <script>
-        function spiral () {
-            octo.home()
-            octo.penColor('blue')
-            octo.penWidth(1.5)
-            for (i = 0; i < 200; i++) {
-                octo.forward(180)
-                octo.right(115)
-            }
-            octo2.home()
-            for (i = 0; i < 16; i++) {
-                octo2.forward(100)
-                octo2.right(170)
-            }
-        }
-    </script>
-    </head>
+
+        // Call a module fo the other
+        window.spider.spiral()
+      }
+  </script>
+  </head>
 <body onload="loadDone()">
-<div>
-<svg id='spiderSvgCanvas' height="500" width="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
-</svg>
-</div> 
-<div>
+  <div>
     <button onclick="octo.forward(20)">Forward</button>
     <button onclick="octo.right(45)">Right</button>
     <button onclick="octo.left(45)">Left</button>
@@ -48,7 +38,10 @@
     <button onclick="spiral()">Spiral</button>
     <button onclick="window.spider.testGrid()">Grid</button>    
     <button onclick="window.spider.square()">Square</button>    
-</div>
+  </div>
+  <svg id='spiderSvgCanvas' height="500" width="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+  </svg>
 To start with character 1 at offset 0. To make things that are hard to see easy, even beautiful.
 That is the call I hope to help. For I have knonw the path many times. Thankful for those that have opened eyes
 </body>

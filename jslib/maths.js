@@ -20,17 +20,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-export function * intRange (n) { // a generator function
-    let val = v;
-    let end = v + (dv * n)
-    while (val < end) {
+// Positive integer ranges starting from 0
+export function * intRange (n) { 
+    let val = 0;
+    while (val < n) {
       let current = val;
-      val = val + dv;
+      val += 1;
       yield current;
     }
   }
 
-export function * linearRange (v, dv, n) { // a generator function
+// Real number ranges with uniform linear values 
+export function * linearRange (v, dv, n) {
     let val = v;
     let end = v + (dv * n)
     while (val < end) {

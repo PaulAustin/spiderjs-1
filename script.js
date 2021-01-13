@@ -32,3 +32,15 @@ window.spider.square = function () {
       octo.right(90)
   }
 }
+
+window.spider.spiral = function () {
+  let octo = window.spider.newSpider(svg)
+  octo.penColor('fuchsia')
+  octo.penWidth(2.5)
+  octo.home()
+  octo.goto(-100, 100)
+  for (i = 0; i < 16; i++) {
+      octo.forward(100)
+      octo.right(175)
+  }
+}
