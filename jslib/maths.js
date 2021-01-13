@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-function * intRange (n) { // a generator function
+export function * intRange (n) { // a generator function
     let val = v;
     let end = v + (dv * n)
     while (val < end) {
@@ -30,7 +30,7 @@ function * intRange (n) { // a generator function
     }
   }
 
-function * linearRange (v, dv, n) { // a generator function
+export function * linearRange (v, dv, n) { // a generator function
     let val = v;
     let end = v + (dv * n)
     while (val < end) {
