@@ -47,12 +47,64 @@ export class Surface {
   }
 }
 
-export class VirtualSurface extends Surface {  
+export class VirtualCSurface extends Surface {  
   // For SVG if this is done via the transform element then
   // then live updates can be simpler. This only covers
   // linear mappings ( including rotation) but not transition to polar
   // spherical etc. 
+
+  constructor (root) {
+    super()
+    this.root = root
+  }
+  scaleX (x) {
+    return this.root.scaleX(x)
+  }
+  scaleY (y) {
+    return this.root.scaleY(y)
+  }
+  mapX (x) { 
+    return this.root.mapX(x)
+  } 
+  mapY (y) {
+    return this.root.mapY(y)
+  }
+  pmove (v) {
+    return this.root.pmove(v)
+  }
+  pamove (v) {
+    return this.root.pamove(v)
+  }
+  phline (distance) {
+    return this.root.phline(distance)
+  }
+  pvline (distance) {
+    return this.root.pvline(distance)
+  }
+  pline (v) {
+    return this.root.pline(v)
+  }
+  paline (v) {
+    return this.root.paline(v)
+  }
+  pclose () {
+    return this.root.pclose()
+  }  
   
+  createPath (lstyle, pathData) {
+    return this.root.createPath(lstyle, pathData)
+  }
+  append (elt) {
+    return this.root.append(elt)
+  }
+}
+
+export class VirtualPSurface extends Surface {  
+  // For SVG if this is done via the transform element then
+  // then live updates can be simpler. This only covers
+  // linear mappings ( including rotation) but not transition to polar
+  // spherical etc. 
+
   constructor (root) {
     super()
     this.root = root
@@ -68,6 +120,33 @@ export class VirtualSurface extends Surface {
   } 
   mapY (y) {
     return super.mapY(this.scaleY(y) + this.yOffset)
+  }
+  pmove (v) {
+    return this.root.pmove(v)
+  }
+  pamove (v) {
+    return this.root.pamove(v)
+  }
+  phline (distance) {
+    return this.root.phline(distance)
+  }
+  pvline (distance) {
+    return this.root.pvline(distance)
+  }
+  pline (v) {
+    return this.root.pline(v)
+  }
+  paline (v) {
+    return this.root.paline(v)
+  }
+  pclose () {
+    return this.root.pclose()
+  }  
+  createPath (lstyle, pathData) {
+    return this.root.createPath(lstyle, pathData)
+  }
+  append (elt) {
+    return this.root.append(elt)
   }
 }
 
