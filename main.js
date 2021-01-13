@@ -17,7 +17,7 @@ window.spider.testGrid = function () {
 window.spider.square = function () {
   let svg = document.getElementById('spiderSvgCanvas')
   let s = new surface.SVGSurface(svg)
-  octo = new spider.Spider(s)
+  let octo = new spider.Spider(s)
   octo.home()
   // octo.penColor('aliceBlue')
   // octo.penColor('rgb(255,0,0)')
