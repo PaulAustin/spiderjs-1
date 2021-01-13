@@ -21,7 +21,7 @@ SOFTWARE.
 */
 export class Surface {
   constructor () {
-    this.setExtent(100)
+    this.setExtent(100, 100)
     this.linear = true
   }
 
@@ -56,6 +56,7 @@ export class VirtualCSurface extends Surface {
   constructor (root) {
     super()
     this.root = root
+    this.setExtent (root.width, root.height)
   }
   scaleX (x) {
     return this.root.scaleX(x)
@@ -90,7 +91,6 @@ export class VirtualCSurface extends Surface {
   pclose () {
     return this.root.pclose()
   }  
-  
   createPath (lstyle, pathData) {
     return this.root.createPath(lstyle, pathData)
   }

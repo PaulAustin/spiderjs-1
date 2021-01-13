@@ -39,6 +39,7 @@ export class Spider {
     this.heading = 0
     this.location = vector.newXY(0, 0);
     this.s = s
+    // TODO track size of SVG
     this.s.setExtent(400, 400)
     this.path = []
     this.penDepth = 0 
