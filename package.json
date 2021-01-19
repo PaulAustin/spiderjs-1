@@ -1,6 +1,6 @@
 {
-  "name": "spiderjs",
-  "version": "1.0.0",
+  "name": "dimago",
+  "version": "0.1.0",
   "description": "Like turtles, but with webs",
   "main": "proto.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/canoetime/spiderjs.git"
+    "url": "git+https://github.com/PaulAustin/dimago.git"
   },
   "author": "Paul Austin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/canoetime/spiderjs/issues"
+    "url": "https://github.com/PaulAustin/dimago/issues"
   },
-  "homepage": "https://github.com/canoetime/spiderjs#readme",
+  "homepage": "https://github.com/PaulAustin/dimago#readme",
   "dependencies": {
     "interactjs": "^1.10.1"
   }
