@@ -162,10 +162,10 @@ export class SVGSurface extends Surface {
     this.group = this.createGroup(0, 0)
   }
   pmove (v) {
-    return 'm' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' ';
+    return 'm' + this.mapX(v[0]) + ' ' + this.mapY(v[1]) + ' ';
   }
   pamove (v) {
-    return 'M' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' ';
+    return 'M' + this.mapX(v[0]) + ' ' + this.mapY(v[1]) + ' ';
   }
   phline (distance) {
     return 'h' + distance + ' '
@@ -174,10 +174,10 @@ export class SVGSurface extends Surface {
     return 'v' + distance + ' '
   }
   pline (v) {
-    return 'l' + this.scaleX(v.x) + ' ' + this.scaleY(v.y) + ' '
+    return 'l' + this.scaleX(v[0]) + ' ' + this.scaleY(v[1]) + ' '
   }
   paline (v) {
-    return 'L' + this.mapX(v.x) + ' ' + this.mapY(v.y) + ' '
+    return 'L' + this.mapX(v[0]) + ' ' + this.mapY(v[1]) + ' '
   }
   // arc path element
   parc (radius, degrees, large, sweep, dx, dy) {

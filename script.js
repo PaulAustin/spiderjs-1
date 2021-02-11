@@ -5,17 +5,16 @@ import * as geo from './jslib/geometry.js'
 
 // Add an entry point to the global world.
 
-window.spider = {}
-window.spider.newSpider = spider.newSpider
+window.spiderDemo = {}
 
-window.spider.testGrid = function () {
+window.spiderDemo.matrix = function () {
   let svg = document.getElementById('spiderSvgCanvas')
   let s = new surface.SVGSurface(svg)
   let sSub = new surface.VirtualCSurface(s)
   geo.createCGrid(sSub, 0, 20, 5, 0, 20, 5)
 }
 
-window.spider.square = function () {
+window.spiderDemo.square = function () {
   let svg = document.getElementById('spiderSvgCanvas')
   let s = new surface.SVGSurface(svg)
   let octo = new spider.Spider(s)
@@ -23,24 +22,28 @@ window.spider.square = function () {
   // octo.penColor('aliceBlue')
   // octo.penColor('rgb(255,0,0)')
   // octo.penColor('rgba(255,0,0,0.5)')
-  octo.penRGB(0,255,255)
+  octo.penRGB(0, 255, 255)
   octo.penWidth(10.0)
   for (let i = 0; i < 4; i++) {
-      octo.forward(100)
-      // TODO When colors are partly alpha overlapped,
-      // corners get double dipped.
-      octo.right(90)
+    octo.forward(100)
+    // TODO When colors are partly alpha overlapped,
+    // corners get double dipped.
+    octo.right(90)
   }
 }
 
-window.spider.spiral = function () {
-  let octo = window.spider.newSpider(svg)
+window.spiderDemo.grid = function () {
+}
+
+window.spiderDemo.spiral = function () {
+  let svg = document.getElementById('spiderSvgCanvas')
+  let octo = spider.newSpider(svg)
   octo.penColor('fuchsia')
   octo.penWidth(2.5)
   octo.home()
-  octo.goto(-100, 100)
-  for (i = 0; i < 16; i++) {
-      octo.forward(100)
-      octo.right(175)
+  octo.goto([-100, 100])
+  for (let i = 0; i < 4; i++) {
+    octo.forward(100)
+    octo.right(175)
   }
 }

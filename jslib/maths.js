@@ -20,23 +20,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Positive integer ranges starting from 0
-export function * intRange (n) { 
-    let val = 0;
-    while (val < n) {
-      let current = val;
-      val += 1;
-      yield current;
-    }
-  }
+// A bit more pythonic range, random functions
 
-// Real number ranges with uniform linear values 
-export function * linearRange (v, dv, n) {
-    let val = v;
-    let end = v + (dv * n)
-    while (val < end) {
-      let current = val;
-      val = val + dv;
-      yield current;
-    }
+// Positive integer ranges starting from 0
+export function * range (...args) { 
+  let val = 0;
+  let dv = 1;
+  let n = args[0]
+  if (args.length === 3) {
+    val = args[0];
+    dv = args[1];
+    n = args[2];   
+  } else if (args.length === 2) {
+    val = args[0];
+    n = args[2];   
+  } else if (args.length === 1) {
+    n = args[0]
+  } else {
+    console.log('unsupported intRange')
   }
+  let end = val + (dv * n)
+  while (val < end) {
+    let current = val;
+    val += dv;
+    yield current;
+  }
+}

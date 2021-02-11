@@ -1,3 +1,7 @@
+# Feb 10, 2021
+* Working to simpe matrix
+* ideal wodl be a mix of LISP, Python, JavaScript
+
 # Jan 11, 2021 
 * Starting on the  mappig pipeline
 * Geomotry class is an experiment wiht generators iterators

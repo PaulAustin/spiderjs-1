@@ -23,18 +23,13 @@ SOFTWARE.
 // Lanuguages with complex number support are nice, be it fortran, labview, python and the like 
 // But this works pretty well.
 
-export function newXY (x, y) {
-  let v = new V2D()
-  v.x = x;
-  v.y = y;
-  return v
+export function vFromXY (x, y) {
+  return [x, y]
 }
-export function newPolar (r, t) {
-  let v = new V2D()
+
+export function vFromPolar (r, t) {
   let rad = t * Math.PI / 180.0
-  v.x = r * Math.cos(rad);
-  v.y = r * Math.sin(rad);
-  return v
+  return [r * Math.cos(rad), r * Math.sin(rad)]
 }
 
 export function isScalar (v) {
@@ -44,13 +39,44 @@ export function isScalar (v) {
   return (typeof v !== 'number')
 }
 
+export function add (lv, rv) {
+  return [
+    lv[0] + lv[0],
+    lv[1] + lv[1]
+  ]
+}
+export function sub (lv, rv) {
+  return [
+    lv[0] - lv[0],
+    lv[1] - lv[1]
+  ]
+}
+export function mul (lv, rv) {
+  return [
+    lv[0] - (lv[0] * rv[0]) - (lv[1] * rv[1]),
+    lv[1] - (lv[0] * rv[1]) + (lv[1] * rv[0])
+  ]
+}
+export function scale (lv, scale) {
+  return [
+    lv[0] * scale,
+    lv[1] * scale
+  ]
+}
+export function abs (v) {
+  return Math.sqrt((v[0] * v[0]) + (v[1] * v[1]))
+}
+export function angle (v) {
+  return Math.atan(v[0] / v[1])
+}
+
 export class V2D {
   constructor () {
     this.x = this.y = 0
   }
-  setXY (x, y) {
-    this.x = x;
-    this.y = y;
+  setXY (where) {
+    this.x = where[0];
+    this.y = where[1];
   }
   add (v) {
     this.x += v.x;

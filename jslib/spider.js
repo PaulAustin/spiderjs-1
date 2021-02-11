@@ -37,7 +37,7 @@ export class Spider {
   constructor (s) {
     this.lstyle = {color: 'grey', width: 1}
     this.heading = 0
-    this.location = vector.newXY(0, 0);
+    this.location = [0, 0];
     this.s = s
     // TODO track size of SVG
     this.s.setExtent(400, 400)
@@ -62,10 +62,11 @@ export class Spider {
   }
 
   forward (distance) {
-    let v = vector.newPolar(distance, this.heading)
+    let v = vector.vFromPolar(distance, this.heading)
+    console.log("forwRD", distance, this.heading, v)
     let s = this.s
     let path = s.pamove(this.location) + s.pline(v) + s.pclose()
-    this.location.add(v)
+    this.location = vector.add(this.location, v)
 
     let elt = s.createPath(this.lstyle, path)
     this.addNode(elt)
@@ -83,20 +84,18 @@ export class Spider {
     this.heading += angle
   }
 
-  lineto (x, y) {
+  lineto (where) {
     // animate a hop to a new location with shadow?
     let s = this.s
-    let v = vector.newXY(x, y)
-    let path = s.pamove(this.location) + s.paline(v) + s.pclose()
-    this.location.setXY(x, y)
-
+    let path = s.pamove(this.location) + s.paline(where) + s.pclose()
+    this.location = where
     let elt = s.createPath(this.lstyle, path)
     this.addNode(elt)
   }
 
-  goto (x, y) {
+  goto (where) {
     // animate a hop to a new location with shadow?
-    this.location.setXY(x, y)
+    this.location = [...where]
   }
 
   beginFill () {
@@ -115,11 +114,11 @@ export class Spider {
   pathPoints () {}
 
   setX (x) {
-    this.goto(x, this.location.y)
+    this.goto([x, this.location[1]])
   }
 
   setY (y) {
-    this.goto(this.location.x, y)
+    this.goto([this.location[0], y])
   }
 
   setHeading (h) {
@@ -127,7 +126,7 @@ export class Spider {
   }
 
   home () { 
-    this.goto(0, 0)
+    this.goto([0, 0])
     this.setHeading(0)
   }
 
@@ -212,6 +211,15 @@ export class LineNode extends PathNode {
 
 export class Animations {
 
+}
+
+export function createMatrix (dimensions) {
+// create an n-dimensional interactive cellular automaton matirx
+// 0d - a singe point
+// 1D - a line what shapes, line, h/v cricular
+// 2D - a 2d x-y grid ( rectangulare, polar, other)
+// 3D - solid
+// theatal projection could be handled by sperate maping funitons be 
 }
 
 /* 

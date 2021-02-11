@@ -2,47 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Spider Humble Starts</title>    
+  <title>Spider Sample Starts</title>    
   <script type = "module" src = "script.js"></script>
   <script>
     function loadDone () {
         svg = document.getElementById('spiderSvgCanvas')
-        octo = window.spider.newSpider(svg)
     }
-  </script>
-  <script>
-      function spiral () {
-        // Draw one inline
-        octo.home()
-        octo.penColor('blue')
-        octo.penWidth(1.5)
-        for (i = 0; i < 200; i++) {
-            octo.forward(180)
-            octo.right(115)
-        }
-
-        // Call a module fo the other
-        window.spider.spiral()
-      }
   </script>
   </head>
 <body onload="loadDone()">
   <div>
-    <button onclick="octo.forward(20)">Forward</button>
-    <button onclick="octo.right(45)">Right</button>
-    <button onclick="octo.left(45)">Left</button>
-    <button onclick="octo.penColor('red')">Red</button>
-    <button onclick="octo.penColor('blue')">Blue</button>
-    <button onclick="octo.penWidth(8)">Wide</button>
-    <button onclick="octo.penWidth(1)">Narrow</button>
-    <button onclick="spiral()">Spiral</button>
-    <button onclick="window.spider.testGrid()">Grid</button>    
-    <button onclick="window.spider.square()">Square</button>    
+    <button onclick="window.spiderDemo.spiral()">Spiral</button>
+    <button onclick="window.spiderDemo.grid()">Grid</button>
   </div>
   <svg id='spiderSvgCanvas' height="500" width="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
   </svg>
-To start with character 1 at offset 0. To make things that are hard to see easy, even beautiful.
-That is the call I hope to help. For I have knonw the path many times. Thankful for those that have opened eyes
 </body>
 </html>
