@@ -63,7 +63,6 @@ export class Spider {
 
   forward (distance) {
     let v = vector.vFromPolar(distance, this.heading)
-    console.log("forwRD", distance, this.heading, v)
     let s = this.s
     let path = s.pamove(this.location) + s.pline(v) + s.pclose()
     this.location = vector.add(this.location, v)

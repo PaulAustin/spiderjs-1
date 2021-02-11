@@ -41,14 +41,14 @@ export function isScalar (v) {
 
 export function add (lv, rv) {
   return [
-    lv[0] + lv[0],
-    lv[1] + lv[1]
+    lv[0] + rv[0],
+    lv[1] + rv[1]
   ]
 }
 export function sub (lv, rv) {
   return [
-    lv[0] - lv[0],
-    lv[1] - lv[1]
+    lv[0] - rv[0],
+    lv[1] - rv[1]
   ]
 }
 export function mul (lv, rv) {
