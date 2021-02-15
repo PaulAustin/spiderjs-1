@@ -34,11 +34,11 @@ export function createCGrid (s, x, dx, nx, y, dy, ny) {
   let h = dy * (ny - 1)
   for (const px of m.linearRange(x, dx, nx)) {
     octo.goto(px, y)
-    octo.lineto(px, h)
+    octo.lineTo(px, h)
   }
   for (const py of m.linearRange(y, dy, ny)) {
     octo.goto(x, py)
-    octo.lineto(w, py)
+    octo.lineTo(w, py)
   }
 }
 

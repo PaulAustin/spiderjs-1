@@ -83,7 +83,7 @@ export class Spider {
     this.heading += angle
   }
 
-  lineto (where) {
+  lineTo (where) {
     // animate a hop to a new location with shadow?
     let s = this.s
     let path = s.pamove(this.location) + s.paline(where) + s.pclose()
@@ -92,7 +92,7 @@ export class Spider {
     this.addNode(elt)
   }
 
-  goto (where) {
+  moveTo (where) {
     // animate a hop to a new location with shadow?
     this.location = [...where]
   }
@@ -113,11 +113,11 @@ export class Spider {
   pathPoints () {}
 
   setX (x) {
-    this.goto([x, this.location[1]])
+    this.moveTo([x, this.location[1]])
   }
 
   setY (y) {
-    this.goto([this.location[0], y])
+    this.moveTo([this.location[0], y])
   }
 
   setHeading (h) {
@@ -125,7 +125,7 @@ export class Spider {
   }
 
   home () { 
-    this.goto([0, 0])
+    this.moveTo([0, 0])
     this.setHeading(0)
   }
 

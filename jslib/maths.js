@@ -24,25 +24,35 @@ SOFTWARE.
 
 // Positive integer ranges starting from 0
 export function * range (...args) { 
-  let val = 0;
-  let dv = 1;
-  let n = args[0]
+  let start = 0
+  let stop = 0
+  let step = 1
   if (args.length === 3) {
-    val = args[0];
-    dv = args[1];
-    n = args[2];   
+    start = args[0];
+    stop = args[1];
+    step = args[2];   
   } else if (args.length === 2) {
-    val = args[0];
-    n = args[2];   
+    start = args[0];
+    stop = args[1];
   } else if (args.length === 1) {
-    n = args[0]
+    stop = args[0];
   } else {
     console.log('unsupported intRange')
   }
-  let end = val + (dv * n)
-  while (val < end) {
+  let val = start
+  while (val < stop) {
     let current = val;
-    val += dv;
+    val += step;
     yield current;
+  }
+}
+
+export function * fgen (f, x0, dx) {
+  let x = x0;
+
+  while (true) {
+    let current = x
+    x += dx;
+    yield f(current);
   }
 }
