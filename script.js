@@ -3,6 +3,7 @@ import * as surface from './jslib/surface.js'
 import * as spider from './jslib/spider.js'
 import * as geo from './jslib/geometry.js'
 import * as maths from './jslib/maths.js'
+import * as tk from './jslib/tokenizer.js'
 
 // Add an entry point to the global world.
 
@@ -67,6 +68,13 @@ export function koch_edge (octo, side_length, order) {
   } else {
     octo.forward(side_length)
   }
+}
+
+window.spiderDemo.parse = function () {
+  let cText = ' ( 1234 45 abc) '
+  let parser = new tk.Tokenizer()
+  console.log('Try parsing')
+  parser.parse(cText)
 }
 
 window.spiderDemo.spiral = function () {
