@@ -38,6 +38,57 @@ function isAlphaNum (cCode) {
   return (cCode >= 65 && cCode < 91) || (cCode >= 97 && cCode < 123)
 }
 
+function buildCharSymolsTable () {
+  let symbolChar = new Array(128).fill(false)
+
+  // This might move to a bit field of symbol properties
+  // but is a clean way to avoid too much ASCII hardcoding.
+  symbolChar['#'.charCodeAt(0)] = true 
+  symbolChar['$'.charCodeAt(0)] = true 
+  symbolChar['_'.charCodeAt(0)] = true 
+  symbolChar['`'.charCodeAt(0)] = true 
+  
+  symbolChar['!'.charCodeAt(0)] = true 
+  symbolChar['?'.charCodeAt(0)] = true 
+  symbolChar['~'.charCodeAt(0)] = true 
+  symbolChar['%'.charCodeAt(0)] = true
+  symbolChar['&'.charCodeAt(0)] = true 
+  symbolChar['|'.charCodeAt(0)] = true 
+
+  symbolChar['+'.charCodeAt(0)] = true 
+  symbolChar['-'.charCodeAt(0)] = true 
+  symbolChar['*'.charCodeAt(0)] = true 
+  symbolChar['/'.charCodeAt(0)] = true 
+  symbolChar['='.charCodeAt(0)] = true 
+
+  symbolChar[','.charCodeAt(0)] = true 
+  symbolChar['.'.charCodeAt(0)] = true 
+  symbolChar[':'.charCodeAt(0)] = true 
+  symbolChar[';'.charCodeAt(0)] = true 
+
+  symbolChar['('.charCodeAt(0)] = true 
+  symbolChar[')'.charCodeAt(0)] = true 
+  symbolChar['<'.charCodeAt(0)] = true 
+  symbolChar['>'.charCodeAt(0)] = true 
+  symbolChar['['.charCodeAt(0)] = true 
+  symbolChar[']'.charCodeAt(0)] = true 
+  symbolChar['{'.charCodeAt(0)] = true 
+  symbolChar['}'.charCodeAt(0)] = true 
+
+  return symbolChar
+}
+
+export let charSymolsTable = buildCharSymolsTable()
+
+export function isSymbol (cCode) {
+  // Only considering ASCII symbols
+  if (cCode < 128) {
+    return charSymolsTable[cCode]
+  } else {
+    return false
+  }
+}
+
 export class Tokenizer {
   constructor () {
     this.ct = ''
@@ -64,18 +115,40 @@ export class Tokenizer {
     let begin = this.pos
     let c = this.ct.charAt(this.pos)
     let cCode = this.ct.charCodeAt(this.pos)
-    if (isNum(cCode)) {
+    if (c === '"' || c === "'") {
+      this.readStringLiteral(c)
+    } else if (isNum(cCode)) {
       this.readNumber()
     } else if (isAlphaNum(cCode)) {
       this.readSymbol()
-    } else if (c === '(' || c === ')') {
+    } else if (isSymbol(cCode)) {
       this.pos += 1
     } else {
       // nothing found ??
     }
-    this.printRange(begin, this.pos)
+    if (this.pos > begin) {
+      this.printRange(begin, this.pos)
+    }
   }
 
+  // pos should be at fist numeric character
+  readStringLiteral (delim) {
+    let c = this.ct.charAt(this.pos)
+    if (c !== delim) {
+      return
+    } else {
+      this.pos += 1
+    }
+    while (this.pos < this.end) {
+      // escape sequences are not handled at this point \" \'
+      let c = this.ct.charAt(this.pos)
+      this.pos += 1
+      if (c === delim) {
+        break;
+      }
+    }
+  }
+  
   // pos should be at fist numeric character
   readNumber () {
     // There are differnt number formats 
