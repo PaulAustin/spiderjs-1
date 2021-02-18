@@ -38,9 +38,15 @@ export class LispEx {
 
   repl (codeText) {
     tk.parse(codeText)
-    return ''
+    let expr = null
+    return this.eval(expr)
   }
   
+  eval (expr) {
+    // CAR CDR CONS DEFINE LAMBDA oh what fun lies ahead
+    return expr
+  }
+
   exec () {
     return 0
   }
