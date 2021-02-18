@@ -74,9 +74,8 @@ window.spiderDemo.parse = function () {
   let cText = ' ( 1234 45 abc "cat" \'dog\' [.] "this"123"is"close+) '
   let parser = new tk.Tokenizer()
   console.log('Try parsing')
-  parser.parse(cText)
-
-  // console.log('char table', tk.charSymolsTable)
+  let tokens = parser.parse(cText)
+  console.log(tokens)
 }
 
 window.spiderDemo.spiral = function () {

@@ -89,30 +89,48 @@ export function isSymbol (cCode) {
   }
 }
 
+export class Token {
+  constructor (token, type) {
+    // Could store begin,end but for JS this is pretty easy for simple programs 
+    this.token = token
+    this.type = type
+  }
+}
+
 export class Tokenizer {
   constructor () {
     this.ct = ''
     this.pos = 0
     this.end = 0
+    this.tokens = []
+  }
+
+  addToken (begin, end, type) {
+    let token = this.ct.substring(begin, end)
+    let tk = new Token(token, type)
+    this.tokens.push(tk)
   }
 
   parse (codeText) {
     this.ct = codeText
     this.pos = 0
     this.end = this.ct.length
+    this.tokends = []
     while (this.pos < this.end) {
       this.skipSpaces()
       this.readToken()
     }
+    return this.tokens
   }
 
   checkForComment () {
+    // Coments could be added to the token stream
     // TODO skip to endo-of-line comments
     // or block comments
   }
 
   readToken () {
-    let begin = this.pos
+    // let begin = this.pos
     let c = this.ct.charAt(this.pos)
     let cCode = this.ct.charCodeAt(this.pos)
     if (c === '"' || c === "'") {
@@ -120,20 +138,20 @@ export class Tokenizer {
     } else if (isNum(cCode)) {
       this.readNumber()
     } else if (isAlphaNum(cCode)) {
-      this.readSymbol()
+      this.readIdentifier()
     } else if (isSymbol(cCode)) {
-      this.pos += 1
+      this.readSymbol()
     } else {
       // nothing found ??
     }
-    if (this.pos > begin) {
-      this.printRange(begin, this.pos)
-    }
+    // if (this.pos > begin) {
+    //  this.printRange(begin, this.pos)
+    // }
   }
 
-  // pos should be at fist numeric character
   readStringLiteral (delim) {
     let c = this.ct.charAt(this.pos)
+    let begin = this.pos
     if (c !== delim) {
       return
     } else {
@@ -147,13 +165,14 @@ export class Tokenizer {
         break;
       }
     }
+    this.addToken(begin, this.pos, 'str')
   }
   
-  // pos should be at fist numeric character
   readNumber () {
-    // There are differnt number formats 
+    // There are different number formats 
     // TODO now it only handles simple integers.
-    // let begin = this.pos
+    // TODO should complex, quaternions be covered here.
+    let begin = this.pos
     while (this.pos < this.end) {
       let cCode = this.ct.charCodeAt(this.pos)
       if (isNum(cCode)) {
@@ -162,13 +181,14 @@ export class Tokenizer {
         break;
       }
     }
+    this.addToken(begin, this.pos, 'int')
   }
 
   // pos should be at fist alpha character
-  readSymbol () {
-    // There are differnt number formats 
+  readIdentifier () {
+    // There are different number formats 
     // TODO now it only handles alphanum, no emoji.
-    // let begin = this.pos
+    let begin = this.pos
     while (this.pos < this.end) {
       let cCode = this.ct.charCodeAt(this.pos)
       if (isAlphaNum(cCode)) {
@@ -177,6 +197,17 @@ export class Tokenizer {
         break;
       }
     }
+    this.addToken(begin, this.pos, 'id')
+  }
+
+  readSymbol () {
+    // language may have compound symbols (=, ==, ===, !=, ->, etc)
+    // these need to be choosen in an unambigoud ways
+    // that is up to the language designerno emoji.
+    let begin = this.pos
+    this.pos += 1
+    // TODO check for compound symbol operators
+    this.addToken(begin, this.pos, 'sym')
   }
 
   printRange (begin, end) {
