@@ -1,9 +1,11 @@
+/* eslint-disable quotes */
 
 import * as surface from './jslib/surface.js'
 import * as spider from './jslib/spider.js'
 import * as geo from './jslib/geometry.js'
 import * as maths from './jslib/maths.js'
 import * as tk from './jslib/tokenizer.js'
+import * as lisp from './jslib/langlisp.js'
 
 // Add an entry point to the global world.
 
@@ -70,8 +72,23 @@ export function koch_edge (octo, side_length, order) {
   }
 }
 
+window.spiderDemo.lisp = function () {
+  let lispText = `
+  (+ (1 2 3 4))
+  `
+  let lispEx = new lisp.LispEx()
+
+  let ast = lispEx.repl(lispText)
+  console.log(ast)
+}
+
 window.spiderDemo.parse = function () {
-  let cText = ' ( 1234 45 abc "cat" \'dog\' [.] "this"123"is"close+) '
+  let cText = `
+  ( 1234 45 abc
+    ( "cat" \'dog\' )
+    [.]
+    "this"123"is"close+
+    ) `
   let parser = new tk.Tokenizer()
   console.log('Try parsing')
   let tokens = parser.parse(cText)

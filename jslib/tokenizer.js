@@ -90,10 +90,11 @@ export function isSymbol (cCode) {
 }
 
 export class Token {
-  constructor (token, type) {
+  constructor (token, type, line) {
     // Could store begin,end but for JS this is pretty easy for simple programs 
     this.token = token
     this.type = type
+    this.line = line
   }
 }
 
@@ -102,12 +103,13 @@ export class Tokenizer {
     this.ct = ''
     this.pos = 0
     this.end = 0
+    this.line = 0
     this.tokens = []
   }
 
   addToken (begin, end, type) {
     let token = this.ct.substring(begin, end)
-    let tk = new Token(token, type)
+    let tk = new Token(token, type, this.line)
     this.tokens.push(tk)
   }
 
@@ -144,9 +146,6 @@ export class Tokenizer {
     } else {
       // nothing found ??
     }
-    // if (this.pos > begin) {
-    //  this.printRange(begin, this.pos)
-    // }
   }
 
   readStringLiteral (delim) {
@@ -220,6 +219,9 @@ export class Tokenizer {
       let c = this.ct.charAt(this.pos)
       if (c === ' ' || c === '\t' || c === '\n') {
         this.pos += 1
+        if (c === '\n') {
+          this.line += 1
+        }
       } else if (c === '/' && this.checkForComment()) {
         this.pos += 1
         // Skip the commnent
