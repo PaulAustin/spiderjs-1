@@ -42,8 +42,8 @@ window.spiderDemo.spiral = function () {
   octo.penWidth(2.5)
   octo.home()
   octo.goto([-100, 100])
-  for (let i = 0; i < 36; i++) {
+  for (let i = 0; i < 5; i++) {
     octo.forward(200)
-    octo.right(170)
+    octo.right(72)
   }
 }
