@@ -151,6 +151,10 @@ export class VirtualPSurface extends Surface {
 }
 
 export class BitmapSurface extends Surface {  
+  constructor (canvas) {
+    super()
+    this.canvas = canvas
+  }
 }
 
 export class SVGSurface extends Surface {
