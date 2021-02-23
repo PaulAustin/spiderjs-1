@@ -194,6 +194,16 @@ export class SVGSurface extends Surface {
     return 'z'
   }  
 
+  createSquare (lstyle, pathData) {
+    var elt = document.createElementNS(this.ns, 'rectangle');
+    elt.setAttribute('stroke', lstyle.color);
+    elt.setAttribute('stroke-width', lstyle.width);
+    // paths look at linejoin not linecap
+    elt.setAttribute('stroke-linejoin', 'round');
+    elt.setAttribute('d', pathData);
+    return elt;
+  }
+
   createPath (lstyle, pathData) {
     var elt = document.createElementNS(this.ns, 'path');
     elt.setAttribute('stroke', lstyle.color);
