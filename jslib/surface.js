@@ -154,7 +154,27 @@ export class BitmapSurface extends Surface {
   constructor (canvas) {
     super()
     this.canvas = canvas
+    this.ctx = this.canvas.getContext('2d')
+
   }
+
+  pmove (v) {
+    ctx.moveTo(v[0], v[1])
+  }
+  pamove (v) {
+    ctx.moveTo(v[0], v[1])
+  }
+  pline (v) {
+    ctx.lineTo(v[0], v[1])
+  }
+  paline (v) {
+    ctx.moveTo(v[0], v[1])
+  }
+  parc (radius, degrees, large, sweep, dx, dy) {
+    // This function is very different
+    // cx.arcTo(radius)
+  }
+  
 }
 
 export class SVGSurface extends Surface {

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 5 - Turtles</title>
+  <!--script type = "module" src = "../jslib/script.js"></script -->
+  <script type = "module">
+
+    import * as surface from '../jslib/surface.js'
+    import * as spider from '../jslib/spider.js'
+    import * as geo from '../jslib/geometry.js'
+    import * as maths from '../jslib/maths.js'
+
+    export function line () {
+      console.log("line")
+    }
+    export function triangle () {
+      let svg = document.getElementById('spiderSvgCanvas')
+      let s = new surface.SVGSurface(svg)
+      let octo = new spider.Spider(s)
+      octo.home()
+      octo.moveTo([-100, -100])
+      octo.penColor('orange')
+      octo.penWidth(10.0)
+      for (let i = 0; i < 3; i++) {
+        octo.forward(100)
+        // TODO When colors are partly alpha overlapped,
+        // corners get double dipped.
+        octo.right(120)
+      }
+    }
+    export function square () {
+      console.log("square")
+    }
+
+    window.demos = {
+      "triangle":triangle,
+      "square":square,
+    }
+
+  </script>
+  </head>
+<body>
+  <div>
+    <button onclick="line()">Line</button>
+    <button onclick="window.demos.triangle()">Triangle</button>
+    <button onclick="window.demos.square()">Square</button>
+  </div>
+  <svg id='spiderSvgCanvas' height="500" width="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  </svg>
+</body>
+</html>
